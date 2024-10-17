@@ -24,7 +24,7 @@ export default async function Home() {
         {session?.user && (
           <>
             <Link
-              href="/isr"
+              href="/isr?loggedIn=true"
               className="text-blue-600 hover:underline bg-yellow-400 px-8 py-4"
             >
               Go make the set-cookie in /isr
