@@ -7,17 +7,19 @@ import { useEffect, useState } from 'react';
 export default function CheckAuth() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [data, setData] = useState<Session | null>(null);
+  const [count, setCount] = useState(0);
   const searchParams = useSearchParams();
 
   const alreadyLoggedIn = searchParams.get('loggedIn') === 'true';
 
   useEffect(() => {
     async function checkAuth() {
-      if (alreadyLoggedIn) return;
+      if (alreadyLoggedIn || count >= 10) return;
       try {
         const response = await fetch('/api/auth/check');
         const data = await response.json();
         if (!response.ok) {
+          setCount(count + 1);
           throw new Error(data.message);
         }
         setLoggedIn(true);
@@ -29,12 +31,12 @@ export default function CheckAuth() {
       }
     }
 
-    const intervalId = setInterval(checkAuth, 1000);
+    const intervalId = setInterval(checkAuth, 5000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [alreadyLoggedIn]);
+  }, [alreadyLoggedIn, count]);
 
   if (!loggedIn || alreadyLoggedIn) {
     return null;

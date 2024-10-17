@@ -10,7 +10,7 @@ export default async function Page() {
       <h1>
         This page is <span className="font-bold">ISR</span>
       </h1>
-      <p className="text-gray-700 text-lg">It revalidates every 60s</p>
+      <p className="text-gray-700 text-lg">It revalidates every 30</p>
       <p className="text-gray-700 text-lg">
         The time is {new Date(data.datetime).toLocaleString()}
       </p>
