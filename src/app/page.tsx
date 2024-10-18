@@ -10,8 +10,10 @@ export default async function Home() {
         This page is <span className="font-bold">SSR</span>
       </h1>
       <nav className="flex gap-4 flex-col items-center">
-        {session?.user && (
+        {session?.user ? (
           <div>{`you are logged in as ${session.user.email}`}</div>
+        ) : (
+          <div>you are not logged in</div>
         )}
         {!session?.user && (
           <Link

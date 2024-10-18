@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import CheckAuth from './_components/checkauth';
 
 export const revalidate = 30;
@@ -14,7 +15,9 @@ export default async function Page() {
       <p className="text-gray-700 text-lg">
         The time is {new Date(data.datetime).toLocaleString()}
       </p>
-      <CheckAuth />
+      <Suspense fallback={null}>
+        <CheckAuth />
+      </Suspense>
     </div>
   );
 }
